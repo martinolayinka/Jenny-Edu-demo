@@ -5,7 +5,14 @@ pipeline {
             args '-p 3000:3000'
         }
     }
+
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
@@ -33,7 +40,7 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline succeeded! All tests passed and app runs.'
+            echo 'Pipeline succeeded! All tests passed.'
         }
         failure {
             echo 'Pipeline failed. Check the logs above for which stage failed.'
