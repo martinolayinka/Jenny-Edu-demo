@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:14'
+            image 'node:18'
             args '-p 3000:3000'
         }
     }
@@ -21,19 +21,13 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'npm test'
+                sh 'npx jest'
             }
         }
 
         stage('Build') {
             steps {
                 sh 'npm run build'
-            }
-        }
-
-        stage('Run App') {
-            steps {
-                sh 'node index.js'
             }
         }
     }
